@@ -63,6 +63,15 @@ public class StudentGradeAnalyzer {
         students.add(new Student("Esha", Arrays.asList(33.0, 40.0, 38.0, 45.0)));
         students.add(new Student("Farhan", Arrays.asList(61.0, 64.0, 58.0, 66.0)));
     }
+    // Print statistics using DoubleSummaryStatistics
+    public void printClassStatistics() {
+        DoubleSummaryStatistics stats = students.stream()
+                .mapToDouble(Student::getAverage)
+                .summaryStatistics();
+
+        System.out.printf("Count: %d, Min: %.2f, Max: %.2f, Average: %.2f, Sum: %.2f%n",
+                stats.getCount(), stats.getMin(), stats.getMax(), stats.getAverage(), stats.getSum());
+    }
 
 }
 
