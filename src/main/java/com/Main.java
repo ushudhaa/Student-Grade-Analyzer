@@ -41,4 +41,28 @@ class Student {
 public class StudentGradeAnalyzer {
 
     private List<Student> students;
+    // Lambda implementation of the custom functional interface
+    private GradeCalculator gradeCalculator = average -> {
+        if (average >= 90) return 'A';
+        else if (average >= 75) return 'B';
+        else if (average >= 60) return 'C';
+        else if (average >= 40) return 'D';
+        else return 'F';
+    };
+
+    public StudentGradeAnalyzer() {
+        students = new ArrayList<>();
+        loadSampleData();
+    }
+
+    private void loadSampleData() {
+        students.add(new Student("Aarav", Arrays.asList(88.0, 92.0, 79.0, 95.0)));
+        students.add(new Student("Bina", Arrays.asList(45.0, 60.0, 55.0, 50.0)));
+        students.add(new Student("Chirag", Arrays.asList(72.0, 68.0, 74.0, 71.0)));
+        students.add(new Student("Deepa", Arrays.asList(95.0, 98.0, 91.0, 99.0)));
+        students.add(new Student("Esha", Arrays.asList(33.0, 40.0, 38.0, 45.0)));
+        students.add(new Student("Farhan", Arrays.asList(61.0, 64.0, 58.0, 66.0)));
+    }
+
+}
 
