@@ -80,6 +80,12 @@ public class StudentGradeAnalyzer {
                         Collectors.mapping(Student::getName, Collectors.toList())
                 ));
     }
-
+    // Top N students sorted by average descending
+    public List<Student> topStudents(int n) {
+        return students.stream()
+                .sorted((s1, s2) -> Double.compare(s2.getAverage(), s1.getAverage()))
+                .limit(n)
+                .collect(Collectors.toList());
+    }
 }
 
