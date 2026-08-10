@@ -72,6 +72,14 @@ public class StudentGradeAnalyzer {
         System.out.printf("Count: %d, Min: %.2f, Max: %.2f, Average: %.2f, Sum: %.2f%n",
                 stats.getCount(), stats.getMin(), stats.getMax(), stats.getAverage(), stats.getSum());
     }
+    // Group students by grade letter using Collectors.groupingBy
+    public Map<Character, List<String>> groupByGrade() {
+        return students.stream()
+                .collect(Collectors.groupingBy(
+                        s -> gradeCalculator.calculate(s.getAverage()),
+                        Collectors.mapping(Student::getName, Collectors.toList())
+                ));
+    }
 
 }
 
