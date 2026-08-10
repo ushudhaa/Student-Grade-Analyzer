@@ -87,5 +87,42 @@ public class StudentGradeAnalyzer {
                 .limit(n)
                 .collect(Collectors.toList());
     }
+    // Students who need improvement (average below passing threshold)
+    public List<Student> studentsNeedingSupport(double passMark) {
+        return students.stream()
+                .filter(s -> s.getAverage() < passMark)
+                .collect(Collectors.toList());
+    }
+
+    public void printAllGradeDescriptions() {
+        students.forEach(s ->
+                System.out.println(s.getName() + " -> " + gradeCalculator.describe(s.getAverage())));
+    }
+
+    public static void main(String[] args) {
+        StudentGradeAnalyzer analyzer = new StudentGradeAnalyzer();
+
+        System.out.println("=== Class Statistics ===");
+        analyzer.printClassStatistics();
+
+        System.out.println("\n=== Grade Descriptions (Functional Interface + default method) ===");
+        analyzer.printAllGradeDescriptions();
+
+        System.out.println("\n=== Students Grouped by Grade ===");
+        analyzer.groupByGrade().forEach((grade, names) ->
+                System.out.println("Grade " + grade + ": " + names));
+
+        System.out.println("\n=== Top 3 Students ===");
+        analyzer.topStudents(3).forEach(System.out::println);
+
+        System.out.println("\n=== Students Needing Support (avg < 60) ===");
+        List<Student> support = analyzer.studentsNeedingSupport(60);
+        if (support.isEmpty()) {
+            System.out.println("None! Everyone is passing.");
+        } else {
+            support.forEach(System.out::println);
+        }
+    }
+
 }
 
