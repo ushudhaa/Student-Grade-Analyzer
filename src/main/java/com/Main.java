@@ -7,3 +7,9 @@ import java.util.stream.*;
 @FunctionalInterface
 interface GradeCalculator {
     char calculate(double average);
+
+    // default method combining behavior
+    default String describe(double average) {
+        return "Average " + average + " => Grade " + calculate(average);
+    }
+}
